@@ -49,11 +49,15 @@ function scale(p, scaler) {
 }
 
 function normalize(p) {
-   return scale(p, 1/ magnitude(p));
+   return scale(p, 1 / magnitude(p));
 }
 
 function magnitude(p) {
    return Math.hypot(p.x, p.y);
+}
+
+function perpendicular(p) {
+   return new Point(-p.y, p.x);
 }
 
 function translate(loc, angle, offset) {
@@ -73,8 +77,7 @@ function getIntersection(A, B, C, D) {
    const bottom = (D.y - C.y) * (B.x - A.x) - (D.x - C.x) * (B.y - A.y);
 
    const eps = 0.001;
-
-   if (Math.abs(bottom > eps)) {
+   if (Math.abs(bottom) > eps) {
       const t = tTop / bottom;
       const u = uTop / bottom;
       if (t >= 0 && t <= 1 && u >= 0 && u <= 1) {
@@ -93,7 +96,7 @@ function lerp(a, b, t) {
    return a + (b - a) * t;
 }
 
-function lerp2D( A, B, t) {
+function lerp2D(A, B, t) {
    return new Point(lerp(A.x, B.x, t), lerp(A.y, B.y, t));
 }
 
