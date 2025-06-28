@@ -11,7 +11,7 @@
          <button onclick="dispose()">🗑️</button>
          <button onclick="save()">💾</button>
          <label for="fileInput" class="file-input-label">
-            🗂️
+            📁
             <input
                type="file"
                id="fileInput"
@@ -67,9 +67,8 @@
          const worldInfo = worldString ? JSON.parse(worldString) : null;
          let world = worldInfo
             ? World.load(worldInfo)
-            : new World(new Graph())
-
-         const graph = world.Graph;
+            : new World(new Graph());
+         const graph = world.graph; 
 
          const viewport = new Viewport(myCanvas, world.zoom, world.offset);
 
@@ -113,12 +112,13 @@
          function save() {
             world.zoom = viewport.zoom;
             world.offset = viewport.offset;
+
             const element = document.createElement("a");
             element.setAttribute(
                "href",
                "data:application/json;charset=utf-8," +
                   encodeURIComponent(JSON.stringify(world))
-            )
+            );
 
             const fileName = "name.world";
             element.setAttribute("download", fileName);
@@ -131,7 +131,7 @@
          function load(event) {
             const file = event.target.files[0];
 
-            if(!file) {
+            if (!file) {
                alert("No file selected.");
                return;
             }
@@ -143,7 +143,7 @@
                const fileContent = evt.target.result;
                const jsonData = JSON.parse(fileContent);
                world = World.load(jsonData);
-               localStorage.setItem("world", JSON.strigify(world));
+               localStorage.setItem("world", JSON.stringify(world));
                location.reload();
             }
          }
