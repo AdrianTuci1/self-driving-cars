@@ -19,7 +19,7 @@
                onchange="load(event)"
             />
          </label>
-         <button onClick="openOsmPanel()">🗺️</button>
+         <button onclick="openOsmPanel()">🗺️</button>
          &nbsp;
          <button id="graphBtn" onclick="setMode('graph')">🌐</button>
          <button id="stopBtn" onclick="setMode('stop')">🛑</button>
@@ -30,16 +30,15 @@
          <button id="startBtn" onclick="setMode('start')">🚙</button>
          <button id="targetBtn" onclick="setMode('target')">🎯</button>
 
-         <div id="osmPanel" style="display:none">
-            <textarea id="osmDataContainer" rows="10" cols="50"
+         <div id="osmPanel" style="display:none;">
+            <textarea id="osmDataContainer" rows="10" cols="50" 
                placeholder="Paste OSM data here"></textarea>
-         </div>
-         <div>
-            <button onClick="parseOsmData()">✔️</button>
-            <button onClick="closeOsmPanel()">❌</button>
+            <div>
+               <button onclick="parseOsmData()">✔️</button>
+               <button onclick="closeOsmPanel()">❌</button>
+            </div>
          </div>
       </div>
-
 
       <script src="js/world.js"></script>
       <script src="js/viewport.js"></script>
@@ -175,7 +174,6 @@
             }
          }
 
-
          function openOsmPanel() {
             osmPanel.style.display = "block";
          }
@@ -185,11 +183,10 @@
          }
 
          function parseOsmData() {
-            if(osmDataContainer.value == "") {
+            if (osmDataContainer.value == "") {
                alert("Paste data first");
                return;
             }
-
             const res = Osm.parseRoads(JSON.parse(osmDataContainer.value));
             graph.points = res.points;
             graph.segments = res.segments;

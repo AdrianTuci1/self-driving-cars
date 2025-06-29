@@ -9,7 +9,7 @@ class Envelope {
    static load(info) {
       const env = new Envelope();
       env.skeleton = new Segment(info.skeleton.p1, info.skeleton.p2);
-      env.poly = Polygon.load(info.poly)
+      env.poly = Polygon.load(info.poly);
       return env;
    }
 
